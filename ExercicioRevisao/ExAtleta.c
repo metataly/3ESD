@@ -25,7 +25,7 @@ int Divisaoint (int dividendo, int divisor, int *quociente, int *resto);
 void horario (int minutoTotal, int *horas, int *minutos);
 void LeAtleta (TAtleta atletas[], int tamanho);
 void trocar (TAtleta atletas[], int i, int j);
-void exibir (TAtleta [], int tamanho, int contador);
+void exibir (TAtleta [], int tamanho, int contador, int maiorTempo);
 
 //função main
 int main (void){
@@ -59,7 +59,7 @@ int main (void){
         }
     }
 
-    exibir (at, TAM, cont);
+    exibir (at, TAM, cont, maiorT);
     
 }
 
@@ -120,17 +120,21 @@ void trocar(TAtleta atletas[], int i, int j) {
     atletas[j] = aux;
 }
 
-void exibir (TAtleta atletas[], int tamanho, int contador){
+void exibir (TAtleta atletas[], int tamanho, int contador, int maiorTempo){
     int i, h, min;
 
     printf("Hanking de Atletas\n\n");
-    printf("[ NOME ]      [ COD ]     [ TEMPO ]     [ QTD AT ]\n");
+    printf("[ NOME ]      [ COD ]     [ TEMPO ]  \n");
 
     for (i=0; i<tamanho; i++){
+        //exibindo em horas? ou pode ficar em minutos?
+        horario(atletas[i].tempo, &h, &min);
         printf("%s\t\t", atletas[i].nome);
         printf("%d\t\t", atletas[i].codigo);
-        printf("%d min", atletas[i].tempo);
+        printf("%dh %dmin", h, min);
         printf("\n--------------------------------------\n");
     }
-
+    
+    horario(maiorTempo, &h, &min);
+    printf("[ %d ] Atleta(s) realizou/realizaram o Maior Tempo de Treino de %dh %dmin\n", contador, h, min);
 }
